@@ -2,28 +2,31 @@
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        Console.WriteLine("Введите первое число:");
-        if (!int.TryParse(Console.ReadLine(), out int a))
+        if (!Int32.TryParse(Console.ReadLine(), out var a))
         {
-            Console.WriteLine("Error! Invalid input for the first number.");
+            Console.WriteLine("Not a nuber!");
             return;
         }
-
-        Console.WriteLine("Введите второе число:");
-        if (!int.TryParse(Console.ReadLine(), out int b))
+        if (!Int32.TryParse(Console.ReadLine(), out var b))
         {
-            Console.WriteLine("Error! Invalid input for the second number.");
+            Console.WriteLine("Not a nuber!");
             return;
         }
 
         Console.WriteLine("Введите (&, |, ^):");
-        char op = Console.ReadKey().KeyChar;
-        Console.WriteLine();
+
+        var s = Console.ReadLine();
+        if (s.Length == 0 || s.Length > 1)
+        {
+            Console.WriteLine("Wrong sign");
+            return;
+        }
 
         int result = 0;
-        switch (op)
+
+        switch (s[0])
         {
             case '&':
                 result = a & b;
@@ -38,9 +41,9 @@ class Program
                 Console.WriteLine("Error! Invalid operator.");
                 return;
         }
-
         Console.WriteLine($"Десятичное: {result}");
         Console.WriteLine($"Двоичная: {Convert.ToString(result, 2)}");
-        Console.WriteLine($"Шестнадцатеричная: {result:X}");
+        Console.WriteLine($"Шестнадцатеричная: {Convert.ToString(result, 16)}");
     }
+
 }
